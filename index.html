@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riverfront Residence</title>
+  <meta name="description" content="Современный жилой квартал у воды с развитой инфраструктурой и авторской архитектурой.">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111c36;
+      --card: #152345;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #4f9cf9;
+      --accent-2: #7cc8ff;
+      --max: 1160px;
+      --radius: 18px;
+      --shadow: 0 12px 30px rgba(2, 8, 23, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #081225 0%, #0f172a 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), 92%);
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+      background: rgba(8, 18, 37, 0.78);
+      border-bottom: 1px solid rgba(124, 200, 255, 0.18);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .menu a:hover {
+      color: var(--accent-2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 12px 22px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #76b7ff);
+      color: #041222;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border-color: rgba(124, 200, 255, 0.45);
+      color: var(--accent-2);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(124, 200, 255, 0.1);
+    }
+
+    .hero {
+      padding: 82px 0 96px;
+      background:
+        radial-gradient(1000px 420px at 70% -10%, rgba(79, 156, 249, 0.3), transparent 60%),
+        radial-gradient(760px 330px at 10% 0%, rgba(124, 200, 255, 0.22), transparent 55%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 3.8vw, 3.7rem);
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: linear-gradient(160deg, rgba(124, 200, 255, 0.22), rgba(21, 35, 69, 0.8));
+      border: 1px solid rgba(124, 200, 255, 0.35);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 82px 0;
+    }
+
+    .section-head {
+      margin-bottom: 30px;
+      max-width: 760px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.5rem, 2.7vw, 2.5rem);
+      margin-bottom: 12px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      background: var(--card);
+      border: 1px solid rgba(124, 200, 255, 0.24);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature h3 {
+      margin-bottom: 7px;
+      font-size: 1.06rem;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item {
+      min-height: 170px;
+      border-radius: 14px;
+      border: 1px solid rgba(124, 200, 255, 0.25);
+      background:
+        linear-gradient(145deg, rgba(124, 200, 255, 0.28), rgba(21, 35, 69, 0.92)),
+        var(--bg-soft);
+      display: flex;
+      align-items: end;
+      padding: 14px;
+      font-weight: 600;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .phase {
+      background: var(--card);
+      border: 1px solid rgba(124, 200, 255, 0.2);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .phase strong {
+      color: var(--accent-2);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .phase p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-wrap {
+      background: linear-gradient(160deg, rgba(124, 200, 255, 0.22), rgba(21, 35, 69, 0.85));
+      border-radius: var(--radius);
+      border: 1px solid rgba(124, 200, 255, 0.28);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 24px;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .contact-list {
+      margin-top: 16px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .contact-list a {
+      color: var(--accent-2);
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(124, 200, 255, 0.4);
+      background: rgba(8, 18, 37, 0.85);
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #9cb0ca;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .checkbox input {
+      width: auto;
+    }
+
+    .footer {
+      border-top: 1px solid rgba(124, 200, 255, 0.18);
+      margin-top: 64px;
+      padding: 24px 0 42px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .menu {
+        display: none;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <div class="brand">Riverfront Residence</div>
+      <nav class="menu">
+        <a href="#about">О проекте</a>
+        <a href="#advantages">Преимущества</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a class="btn btn-primary" href="#contacts">Оставить заявку</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Новый уровень жизни у воды</h1>
+          <p>
+            Концептуальный жилой квартал с авторской архитектурой, озелененными дворами
+            и инфраструктурой для жизни, отдыха и спорта в одной локации.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contacts">Получить консультацию</a>
+            <a class="btn btn-ghost" href="#gallery">Смотреть планировки</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <h3>Почему выбирают нас</h3>
+          <ul>
+            <li>— Премиальная локация рядом с набережной</li>
+            <li>— Закрытые дворы и круглосуточная безопасность</li>
+            <li>— Школа, фитнес и магазины в пешей доступности</li>
+            <li>— Продуманные планировки и панорамные виды</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>О проекте</h2>
+          <p>
+            Ваш новый проект может выглядеть как полноценный городской район:
+            современные дома, пешеходные бульвары, общественные пространства и
+            сервисы на первых этажах.
+          </p>
+        </div>
+        <div class="timeline">
+          <article class="phase">
+            <strong>Этап 1 — 2026</strong>
+            <p>Старт строительства, благоустройство парковой зоны и открытие шоурума.</p>
+          </article>
+          <article class="phase">
+            <strong>Этап 2 — 2027</strong>
+            <p>Ввод первых домов, запуск коммерческой инфраструктуры и детских площадок.</p>
+          </article>
+          <article class="phase">
+            <strong>Этап 3 — 2028</strong>
+            <p>Финальная очередь, открытие клубного центра и городской площади.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="advantages">
+      <div class="container">
+        <div class="section-head">
+          <h2>Ключевые преимущества</h2>
+          <p>
+            Баланс приватности, комфорта и активной городской жизни в одном месте.
+          </p>
+        </div>
+        <div class="features">
+          <article class="feature">
+            <h3>Расположение</h3>
+            <p>Близость к центру города, паркам и основным транспортным артериям.</p>
+          </article>
+          <article class="feature">
+            <h3>Архитектура</h3>
+            <p>Единый дизайн-код фасадов, панорамные окна и качественные материалы.</p>
+          </article>
+          <article class="feature">
+            <h3>Инфраструктура</h3>
+            <p>Фитнес, кафе, супермаркет, образовательные и досуговые пространства.</p>
+          </article>
+          <article class="feature">
+            <h3>Благоустройство</h3>
+            <p>Ландшафтный дизайн, велодорожки, зоны отдыха и детские площадки.</p>
+          </article>
+          <article class="feature">
+            <h3>Безопасность</h3>
+            <p>Контроль доступа, видеонаблюдение и сервисная управляющая компания.</p>
+          </article>
+          <article class="feature">
+            <h3>Инвестиции</h3>
+            <p>Высокий потенциал роста стоимости недвижимости и спроса на аренду.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <h2>Галерея квартала</h2>
+          <p>Фотографии вашего проекта из папки сайта.</p>
+        </div>
+        <div class="gallery">
+          <div class="gallery-item">
+            <img src="/img/photo1.jpg" alt="Фото проекта 1">
+          </div>
+          <div class="gallery-item">
+            <img src="/img/photo2.jpd" alt="Фото проекта 2" onerror="this.onerror=null;this.src='photo2.jpg';">
+          </div>
+          <div class="gallery-item">
+            <img src="/img/photo3.jpd" alt="Фото проекта 3" onerror="this.onerror=null;this.src='photo3.jpg';">
+          </div>
+          <div class="gallery-item">
+            <img src="/img/photo1.jpg" alt="Фото проекта 1 (дубликат)">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container contact-wrap">
+        <div class="contact-info">
+          <h2>Оставить заявку</h2>
+          <p>
+            Заполните форму, и отдел продаж свяжется с вами, подберет планировку
+            и расскажет об актуальных условиях покупки.
+          </p>
+          <div class="contact-list">
+            <div>Телефон для консультации: <a href="tel:+375291468960">+375 29 146-89-60</a></div>
+            <div>Email: <a href="mailto:sementolmaev1@gmail.com">sementolmaev1@gmail.com</a></div>
+          </div>
+        </div>
+        <form>
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="tel" name="phone" placeholder="+375 (__) ___-__-__" required>
+          <select name="source">
+            <option value="">Как вы узнали о нас?</option>
+            <option>Поиск в интернете</option>
+            <option>Социальные сети</option>
+            <option>Рекомендация друзей</option>
+            <option>Наружная реклама</option>
+          </select>
+          <textarea name="message" placeholder="Комментарий или интересующая планировка"></textarea>
+          <label class="checkbox">
+            <input type="checkbox" required>
+            Согласен на обработку персональных данных
+          </label>
+          <button class="btn btn-primary" type="submit">Отправить заявку</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Riverfront Residence. Все права защищены.
+      <br>
+      Консультация: <a href="tel:+375291468960">+375 29 146-89-60</a> | Email: <a href="mailto:sementolmaev1@gmail.com">sementolmaev1@gmail.com</a>
+    </div>
+  </footer>
+</body>
+</html>
+  
